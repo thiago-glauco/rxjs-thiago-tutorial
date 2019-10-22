@@ -1,4 +1,4 @@
-import { Observable, of, fromEvent } from 'rxjs'; 
+import { Observable, Subject, of, fromEvent } from 'rxjs'; 
 import { map, scan, throttleTime, filter } from 'rxjs/operators';
 
 
@@ -55,4 +55,13 @@ const subscription = timerObs.subscribe(
 
 console.log(subscription);
 
+const subject = new Subject();
 
+subject.subscribe({
+  next: (v) => console.log('observerA: ' + v)
+});
+subject.subscribe({
+  next: (v) => console.log('observerB: ' + v)
+});
+
+subject.next(1);
